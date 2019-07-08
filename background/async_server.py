@@ -20,7 +20,7 @@ django.setup()
 channel_layer = get_channel_layer()
 
 # settings variables
-TOKEN = '863998873:AAFqK78A9Ny9fxlunup3K26aX6uTCu5rmA4'
+TOKEN = 'enter you bot token here'
 DUTY = set()
 
 with open('background/duty.txt', encoding='utf8') as f:
