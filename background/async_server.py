@@ -20,7 +20,7 @@ django.setup()
 channel_layer = get_channel_layer()
 
 # settings variables
-TOKEN = 'enter you bot token here'
+TOKEN = ''  # put your bot token here
 DUTY = set()
 
 with open('background/duty.txt', encoding='utf8') as f:
@@ -159,7 +159,8 @@ server.setblocking(False)
 
 loop = asyncio.get_event_loop()
 
-_thread.start_new_thread(start_bot, ('localhost', 9090))
+if TOKEN:
+    _thread.start_new_thread(start_bot, ('localhost', 9090))
 
 try:
     loop.run_until_complete(run_server())
