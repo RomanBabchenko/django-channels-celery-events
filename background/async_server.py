@@ -57,10 +57,10 @@ def timer(start, message, addr, id):
                 now = datetime.now().strftime('%d.%m.%y %H:%M:%S')
                 print(f"[{now}]:[{message}]: ALERT")
                 for chatid in CONFIG['access']:
-                    tb.send_message(chatid, f"{message}: ALERT")
                     async_to_sync(channel_layer.group_send)(
                         "events", {"type": "events.event", "text": "ALERT", "location": message, "mode": "danger"}
                     )
+                    tb.send_message(chatid, f"{message}: ALERT")
                 break
             else:
                 continue
@@ -86,8 +86,8 @@ async def handle_client(client, addr):
                         _thread.start_new_thread(timer, (start, SENSORS[addr[0]][command[-3]][0], addr[0], command[-3]))
                         print(f"[{now}]:[{SENSORS[addr[0]][command[-3]][0]}]: button DOWN")
                         for chatid in DUTY:
-                            tb.send_message(chatid, f"{SENSORS[addr[0]][command[-3]][0]}: нажата кнопка")
                             loop.create_task(senddata(SENSORS[addr[0]][command[-3]][0], "нажата кнопка"))
+                            tb.send_message(chatid, f"{SENSORS[addr[0]][command[-3]][0]}: нажата кнопка")
                     if command[-1] == '1':
                         SENSORS[addr[0]][command[-3]][1] = 'true'
                         print(f"[{now}]:[{SENSORS[addr[0]][command[-3]][0]}]: button UP")
