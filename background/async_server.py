@@ -1,5 +1,6 @@
 # coding=utf-8
-import asyncio, socket
+import asyncio
+import socket
 import _thread
 import telebot
 import time
@@ -7,7 +8,8 @@ import json
 from bitstring import BitArray
 from datetime import datetime
 
-import os, sys
+import os
+import sys
 import django
 
 from channels.layers import get_channel_layer
@@ -79,8 +81,6 @@ async def handle_client(client, addr):
             now = datetime.now().strftime('%d.%m.%y %H:%M:%S')
             for command in commands:
                 try:
-                    # t1 = threading.Thread(target=timer,
-                    #                       args=(start, SENSORS[addr[0]][command[-3]][0], addr[0], state[-3]))
                     if command[-1] == '0':
                         SENSORS[addr[0]][command[-3]][1] = 'false'
                         _thread.start_new_thread(timer, (start, SENSORS[addr[0]][command[-3]][0], addr[0], command[-3]))
